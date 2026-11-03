@@ -1,0 +1,288 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Life Skills Learning Center</title>
+
+<style>
+    * {
+        box-sizing: border-box;
+    }
+
+    body {
+        margin: 0;
+        font-family: Arial, sans-serif;
+        background-color: #f4f6fb;
+        color: #333;
+    }
+
+    header {
+        background-color: #355c9a;
+        color: white;
+        padding: 30px;
+        text-align: center;
+    }
+
+    nav {
+        background-color: #244575;
+        display: flex;
+        justify-content: center;
+        flex-wrap: wrap;
+        gap: 10px;
+        padding: 15px;
+    }
+
+    nav button {
+        background: white;
+        color: #244575;
+        border: none;
+        padding: 12px 20px;
+        border-radius: 8px;
+        cursor: pointer;
+        font-weight: bold;
+    }
+
+    nav button:hover {
+        background-color: #dce8fa;
+    }
+
+    main {
+        max-width: 1000px;
+        margin: 30px auto;
+        padding: 20px;
+    }
+
+    .page {
+        display: none;
+    }
+
+    .page.active {
+        display: block;
+    }
+
+    .card {
+        background: white;
+        padding: 22px;
+        margin: 15px 0;
+        border-radius: 12px;
+        box-shadow: 0 2px 8px #00000012;
+    }
+
+    .card h3 {
+        color: #355c9a;
+    }
+
+    .action {
+        background-color: #355c9a;
+        color: white;
+        border: none;
+        padding: 12px 18px;
+        border-radius: 7px;
+        cursor: pointer;
+    }
+
+    .action:hover {
+        background-color: #244575;
+    }
+
+    footer {
+        text-align: center;
+        padding: 20px;
+        background: #355c9a;
+        color: white;
+        margin-top: 40px;
+    }
+
+</style>
+</head>
+
+<body>
+
+<header>
+    <h1>Life Skills & Independence</h1>
+    <p>Learning to make responsible decisions every day!</p>
+    <p>Welcome, Students!</p>
+</header>
+
+<nav>
+    <button onclick="showPage('home')">Home</button>
+    <button onclick="showPage('lessons')">Lessons</button>
+    <button onclick="showPage('activities')">Activities</button>
+    <button onclick="showPage('assignments')">Assignments</button>
+    <button onclick="showPage('quiz')">Quiz</button>
+</nav>
+
+<main>
+
+    <!-- HOME PAGE -->
+    <section id="home" class="page active">
+        <div class="card">
+            <h2>Welcome to Our Classroom!</h2>
+            <p>
+                This is your online learning center.
+                Here, you will learn about responsibility,
+                independence, respect, and decision-making.
+            </p>
+            <p>Remember: Your choices and actions matter!</p>
+            <button class="action" onclick="showPage('lessons')">
+                Start Learning
+            </button>
+        </div>
+
+        <div class="card">
+            <h3>Today's Learning Goals</h3>
+            <ul>
+                <li>Understand personal responsibility.</li>
+                <li>Practice making good decisions.</li>
+                <li>Learn how to communicate respectfully.</li>
+            </ul>
+        </div>
+    </section>
+
+    <!-- LESSONS PAGE -->
+    <section id="lessons" class="page">
+        <h2>Our Lessons</h2>
+
+        <div class="card">
+            <h3>Lesson 1: Personal Responsibility</h3>
+            <p>Learn how your actions affect yourself and others.</p>
+            <button class="action" onclick="alert('Lesson 1: Take responsibility for your choices and actions!')">
+                Open Lesson
+            </button>
+        </div>
+
+        <div class="card">
+            <h3>Lesson 2: Respecting Others</h3>
+            <p>Learn how to treat others with kindness and respect.</p>
+            <button class="action" onclick="alert('Lesson 2: Listen to others and respect their differences!')">
+                Open Lesson
+            </button>
+        </div>
+
+        <div class="card">
+            <h3>Lesson 3: Making Good Decisions</h3>
+            <p>Learn how to think before you act and consider consequences.</p>
+            <button class="action" onclick="alert('Lesson 3: Stop, think, and make a responsible choice!')">
+                Open Lesson
+            </button>
+        </div>
+    </section>
+
+    <!-- ACTIVITIES PAGE -->
+    <section id="activities" class="page">
+        <h2>Interactive Activities</h2>
+
+        <div class="card">
+            <h3>What Would You Do?</h3>
+            <p>
+                You disagree with your teacher's decision.
+                How should you express your opinion?
+            </p>
+            <button class="action" onclick="alert('Think about using respectful words and listening to your teacher!')">
+                Reveal a Hint
+            </button>
+        </div>
+
+        <div class="card">
+            <h3>Classroom Responsibility</h3>
+            <p>
+                You accidentally break something in the classroom,
+                but nobody sees you. What should you do?
+            </p>
+            <button class="action" onclick="alert('Remember: Being responsible means being honest, even when nobody is watching!')">
+                Reveal a Hint
+            </button>
+        </div>
+    </section>
+
+    <!-- ASSIGNMENTS PAGE -->
+    <section id="assignments" class="page">
+        <h2>Student Assignments</h2>
+
+        <div class="card">
+            <h3>Assignment 1: My Responsibilities</h3>
+            <p>Write three ways you can show responsibility at school.</p>
+            <textarea id="answer" rows="4" style="width:100%; padding:10px;"
+            placeholder="Write your answer here..."></textarea>
+            <br><br>
+            <button class="action" onclick="alert('Your response: ' + document.getElementById('answer').value)">
+                Check My Response
+            </button>
+        </div>
+    </section>
+
+    <!-- QUIZ PAGE -->
+    <section id="quiz" class="page">
+        <h2>Knowledge Check!</h2>
+
+        <div class="card">
+            <h3>What does personal responsibility mean?</h3>
+
+            <label>
+                <input type="radio" name="q1" value="wrong">
+                Blaming others for your mistakes.
+            </label>
+            <br><br>
+
+            <label>
+                <input type="radio" name="q1" value="correct">
+                Taking ownership of your actions.
+            </label>
+            <br><br>
+
+            <label>
+                <input type="radio" name="q1" value="wrong">
+                Ignoring classroom rules.
+            </label>
+            <br><br>
+
+            <button class="action" onclick="checkQuiz()">
+                Submit Answer
+            </button>
+
+            <p id="result"></p>
+        </div>
+    </section>
+
+</main>
+
+<footer>
+    <p>Life Skills & Independence | Learning Together!</p>
+</footer>
+
+<script>
+
+function showPage(pageName) {
+    let pages = document.querySelectorAll('.page');
+
+    pages.forEach(function(page) {
+        page.classList.remove('active');
+    });
+
+    document.getElementById(pageName).classList.add('active');
+
+    window.scrollTo(0, 0);
+}
+
+function checkQuiz() {
+    let answer = document.querySelector(
+        'input[name="q1"]:checked'
+    );
+
+    let result = document.getElementById('result');
+
+    if (!answer) {
+        result.textContent = "Please select an answer!";
+    } else if (answer.value === "correct") {
+        result.textContent = "Correct! Great job!";
+    } else {
+        result.textContent = "Not quite! Try again.";
+    }
+}
+
+</script>
+
+</body>
+</html>
