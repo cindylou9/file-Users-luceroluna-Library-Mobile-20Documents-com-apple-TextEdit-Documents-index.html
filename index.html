@@ -1,287 +1,847 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Life Skills Learning Center</title>
+<title>Math Quest</title>
 
 <style>
-    * {
-        box-sizing: border-box;
-    }
+* { box-sizing: border-box; }
 
-    body {
-        margin: 0;
-        font-family: Arial, sans-serif;
-        background-color: #f4f6fb;
-        color: #333;
-    }
+:root {
+    --green: #527b68;
+    --dark: #30483b;
+    --cream: #f7f6f0;
+    --light: #eaf1e9;
+    --yellow: #f3d68b;
+    --blue: #e7eff5;
+    --pink: #f5e8e4;
+}
 
-    header {
-        background-color: #355c9a;
-        color: white;
-        padding: 30px;
-        text-align: center;
-    }
+body {
+    margin: 0;
+    font-family: 'Trebuchet MS', Arial, sans-serif;
+    background: var(--cream);
+    color: var(--dark);
+}
 
-    nav {
-        background-color: #244575;
-        display: flex;
-        justify-content: center;
-        flex-wrap: wrap;
-        gap: 10px;
-        padding: 15px;
-    }
+header {
+    background: #527b68;
+    color: white;
+    padding: 17px 7%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 12px;
+}
 
-    nav button {
-        background: white;
-        color: #244575;
-        border: none;
-        padding: 12px 20px;
-        border-radius: 8px;
-        cursor: pointer;
-        font-weight: bold;
-    }
+.logo {
+    font-size: 23px;
+    font-weight: bold;
+}
 
-    nav button:hover {
-        background-color: #dce8fa;
-    }
+.header-stars {
+    background: #ffffff25;
+    border-radius: 20px;
+    padding: 10px 16px;
+    font-weight: bold;
+}
 
-    main {
-        max-width: 1000px;
-        margin: 30px auto;
-        padding: 20px;
-    }
+main {
+    max-width: 1000px;
+    margin: 30px auto;
+    padding: 15px;
+}
 
-    .page {
-        display: none;
-    }
+.screen { display: none; }
+.screen.active { display: block; animation: appear .25s ease; }
 
-    .page.active {
-        display: block;
-    }
+@keyframes appear {
+    from {opacity: 0; transform: translateY(8px);}
+    to {opacity: 1; transform: translateY(0);}
+}
 
-    .card {
-        background: white;
-        padding: 22px;
-        margin: 15px 0;
-        border-radius: 12px;
-        box-shadow: 0 2px 8px #00000012;
-    }
+.welcome {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 25px;
+    background: #e8f0e8;
+    padding: 28px;
+    border-radius: 22px;
+    margin-bottom: 22px;
+}
 
-    .card h3 {
-        color: #355c9a;
-    }
+.welcome h1 {
+    font-size: 34px;
+    margin: 8px 0;
+}
 
-    .action {
-        background-color: #355c9a;
-        color: white;
-        border: none;
-        padding: 12px 18px;
-        border-radius: 7px;
-        cursor: pointer;
-    }
+.welcome p {
+    color: #627367;
+    line-height: 1.6;
+}
 
-    .action:hover {
-        background-color: #244575;
-    }
+.robot {
+    font-size: 90px;
+    background: white;
+    border-radius: 50%;
+    min-width: 125px;
+    height: 125px;
+    display: grid;
+    place-items: center;
+}
 
-    footer {
-        text-align: center;
-        padding: 20px;
-        background: #355c9a;
-        color: white;
-        margin-top: 40px;
-    }
+.tag {
+    color: #527b68;
+    font-weight: bold;
+    letter-spacing: 1px;
+    font-size: 12px;
+}
 
+.panel {
+    background: white;
+    border-radius: 20px;
+    padding: 24px;
+    box-shadow: 0 4px 15px #354b3c0a;
+    margin-bottom: 20px;
+}
+
+.panel h2 { margin-top: 0; }
+
+label {
+    display: block;
+    font-weight: bold;
+    margin: 15px 0 8px;
+}
+
+select {
+    width: 100%;
+    padding: 14px;
+    border: 2px solid #e4e9e3;
+    border-radius: 12px;
+    font-size: 16px;
+    background: #fbfcfa;
+    color: var(--dark);
+}
+
+select:focus {
+    outline: 2px solid #8cac96;
+}
+
+.category-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 12px;
+    margin-top: 15px;
+}
+
+.category {
+    border: 2px solid #e8ece6;
+    background: white;
+    color: var(--dark);
+    border-radius: 16px;
+    padding: 18px 10px;
+    cursor: pointer;
+    text-align: center;
+    margin: 0;
+    transition: .2s;
+}
+
+.category:hover {
+    transform: translateY(-3px);
+    border-color: #9bb6a1;
+}
+
+.category.selected {
+    border-color: #527b68;
+    background: #edf4ed;
+    box-shadow: 0 0 0 2px #527b6820;
+}
+
+.category .emoji {
+    font-size: 32px;
+    display: block;
+    margin-bottom: 8px;
+}
+
+.category small {
+    display: block;
+    color: #78867a;
+    margin-top: 5px;
+    font-size: 12px;
+}
+
+.btn {
+    background: var(--green);
+    color: white;
+    border: none;
+    border-radius: 12px;
+    padding: 14px 22px;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+    margin: 5px;
+    transition: .2s;
+}
+
+.btn:hover {
+    background: #3e634f;
+    transform: translateY(-2px);
+}
+
+.btn.secondary {
+    background: #e9efe9;
+    color: #456451;
+}
+
+.btn:disabled {
+    opacity: .5;
+    cursor: not-allowed;
+    transform: none;
+}
+
+.start-row {
+    text-align: center;
+    margin-top: 20px;
+}
+
+.game-top {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 10px;
+    flex-wrap: wrap;
+}
+
+.pill {
+    background: #edf3ed;
+    border-radius: 30px;
+    padding: 10px 15px;
+    font-weight: bold;
+}
+
+.progress-track {
+    height: 12px;
+    border-radius: 20px;
+    background: #e9eee8;
+    overflow: hidden;
+    margin: 18px 0;
+}
+
+.progress-bar {
+    height: 100%;
+    width: 0%;
+    background: #82a98b;
+    transition: width .3s;
+}
+
+.question-box {
+    background: #f0f4ed;
+    border-radius: 18px;
+    padding: 30px 15px;
+    text-align: center;
+    margin: 20px 0;
+}
+
+.question-box .big {
+    font-size: 40px;
+    font-weight: bold;
+    margin: 12px;
+    color: #30483b;
+}
+
+.question-box p { color: #748177; }
+
+.answers {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+}
+
+.answer {
+    background: white;
+    color: #30483b;
+    border: 2px solid #e5ebe4;
+    border-radius: 13px;
+    min-height: 62px;
+    font-size: 21px;
+    font-weight: bold;
+    cursor: pointer;
+    margin: 0;
+}
+
+.answer:hover:not(:disabled) {
+    background: #edf4ed;
+    border-color: #91ad98;
+}
+
+.answer.correct {
+    background: #dcefe0;
+    border-color: #649b71;
+}
+
+.answer.incorrect {
+    background: #f6e5e1;
+    border-color: #c58b7c;
+}
+
+.feedback {
+    text-align: center;
+    min-height: 28px;
+    margin: 18px 0;
+    font-weight: bold;
+}
+
+.reward {
+    text-align: center;
+    padding: 25px;
+}
+
+.reward-emoji {
+    font-size: 85px;
+    margin: 10px;
+}
+
+.reward-score {
+    background: #f4f0df;
+    padding: 20px;
+    border-radius: 16px;
+    margin: 20px 0;
+}
+
+.badges {
+    display: flex;
+    justify-content: center;
+    gap: 12px;
+    flex-wrap: wrap;
+    margin: 20px 0;
+}
+
+.badge {
+    padding: 14px;
+    background: #f0f1ed;
+    border-radius: 14px;
+    color: #899087;
+    min-width: 110px;
+    font-size: 13px;
+}
+
+.badge span {
+    display: block;
+    font-size: 32px;
+    margin-bottom: 6px;
+}
+
+.badge.earned {
+    background: #fff2d2;
+    color: #745a26;
+}
+
+.small-note {
+    color: #7d897e;
+    font-size: 13px;
+    text-align: center;
+}
+
+@media(max-width: 650px) {
+    .welcome { flex-direction: column-reverse; text-align: center; }
+    .welcome h1 { font-size: 28px; }
+    .category-grid { grid-template-columns: repeat(2, 1fr); }
+    .robot { font-size: 65px; min-width: 95px; height: 95px; }
+}
+
+@media(max-width: 400px) {
+    .answers { grid-template-columns: 1fr; }
+}
 </style>
 </head>
 
 <body>
 
 <header>
-    <h1>Life Skills & Independence</h1>
-    <p>Learning to make responsible decisions every day!</p>
-    <p>Welcome, Students!</p>
+    <div class="logo">📚 Math Quest</div>
+    <div class="header-stars">⭐ <span id="totalStars">0</span> Stars</div>
 </header>
-
-<nav>
-    <button onclick="showPage('home')">Home</button>
-    <button onclick="showPage('lessons')">Lessons</button>
-    <button onclick="showPage('activities')">Activities</button>
-    <button onclick="showPage('assignments')">Assignments</button>
-    <button onclick="showPage('quiz')">Quiz</button>
-</nav>
 
 <main>
 
-    <!-- HOME PAGE -->
-    <section id="home" class="page active">
-        <div class="card">
-            <h2>Welcome to Our Classroom!</h2>
-            <p>
-                This is your online learning center.
-                Here, you will learn about responsibility,
-                independence, respect, and decision-making.
-            </p>
-            <p>Remember: Your choices and actions matter!</p>
-            <button class="action" onclick="showPage('lessons')">
-                Start Learning
+<!-- HOME SCREEN -->
+<section id="home" class="screen active">
+
+    <div class="welcome">
+        <div>
+            <div class="tag">WELCOME, MATH EXPLORER!</div>
+            <h1>Ready for a challenge?</h1>
+            <p>Choose your grade, pick a math skill, and earn stars as you practice!</p>
+            <button class="btn" onclick="showScreen('setup')">
+                Start My Adventure →
+            </button>
+        </div>
+        <div class="robot">🤖</div>
+    </div>
+
+    <div class="panel">
+        <h2>Your Math Achievements 🏆</h2>
+        <p>Complete challenges to collect badges!</p>
+
+        <div class="badges">
+            <div class="badge" id="homeBadge1">
+                <span>🌱</span>First Steps
+            </div>
+            <div class="badge" id="homeBadge2">
+                <span>⭐</span>Math Star
+            </div>
+            <div class="badge" id="homeBadge3">
+                <span>🏆</span>Perfect Score
+            </div>
+        </div>
+    </div>
+
+</section>
+
+<!-- SETUP SCREEN -->
+<section id="setup" class="screen">
+
+    <div class="panel">
+        <div class="tag">YOUR NEXT ADVENTURE</div>
+        <h2>Choose Your Challenge 🎯</h2>
+        <p>First, select your grade level.</p>
+
+        <label for="grade">Grade Level</label>
+        <select id="grade">
+            <option value="K">Kindergarten</option>
+            <option value="1">Grade 1</option>
+            <option value="2">Grade 2</option>
+            <option value="3">Grade 3</option>
+            <option value="4">Grade 4</option>
+            <option value="5">Grade 5</option>
+            <option value="6">Grade 6</option>
+            <option value="7">Grade 7</option>
+            <option value="8">Grade 8</option>
+        </select>
+
+        <label>Choose a Math Skill</label>
+
+        <div class="category-grid">
+            <button class="category selected" data-type="addition" onclick="chooseType(this)">
+                <span class="emoji">➕</span>
+                Addition
+                <small>Put numbers together</small>
+            </button>
+
+            <button class="category" data-type="subtraction" onclick="chooseType(this)">
+                <span class="emoji">➖</span>
+                Subtraction
+                <small>Find the difference</small>
+            </button>
+
+            <button class="category" data-type="multiplication" onclick="chooseType(this)">
+                <span class="emoji">✖️</span>
+                Multiplication
+                <small>Multiply numbers</small>
+            </button>
+
+            <button class="category" data-type="division" onclick="chooseType(this)">
+                <span class="emoji">➗</span>
+                Division
+                <small>Share equally</small>
+            </button>
+
+            <button class="category" data-type="fractions" onclick="chooseType(this)">
+                <span class="emoji">🍕</span>
+                Fractions
+                <small>Parts of a whole</small>
+            </button>
+
+            <button class="category" data-type="decimals" onclick="chooseType(this)">
+                <span class="emoji">🔢</span>
+                Decimals
+                <small>Work with decimals</small>
+            </button>
+
+            <button class="category" data-type="mixed" onclick="chooseType(this)">
+                <span class="emoji">🎲</span>
+                Mixed Practice
+                <small>A little of everything</small>
             </button>
         </div>
 
-        <div class="card">
-            <h3>Today's Learning Goals</h3>
-            <ul>
-                <li>Understand personal responsibility.</li>
-                <li>Practice making good decisions.</li>
-                <li>Learn how to communicate respectfully.</li>
-            </ul>
+        <div class="start-row">
+            <button class="btn" onclick="startGame()">Let's Play! 🚀</button>
+            <br>
+            <button class="btn secondary" onclick="showScreen('home')">← Back Home</button>
         </div>
-    </section>
+    </div>
 
-    <!-- LESSONS PAGE -->
-    <section id="lessons" class="page">
-        <h2>Our Lessons</h2>
+</section>
 
-        <div class="card">
-            <h3>Lesson 1: Personal Responsibility</h3>
-            <p>Learn how your actions affect yourself and others.</p>
-            <button class="action" onclick="alert('Lesson 1: Take responsibility for your choices and actions!')">
-                Open Lesson
+<!-- GAME SCREEN -->
+<section id="game" class="screen">
+
+    <div class="panel">
+        <div class="game-top">
+            <span class="pill" id="gameGrade">Grade 1</span>
+            <span class="pill">⭐ <span id="roundStars">0</span></span>
+            <span class="pill" id="questionCount">1 / 10</span>
+        </div>
+
+        <div class="progress-track">
+            <div class="progress-bar" id="progress"></div>
+        </div>
+
+        <div class="question-box">
+            <div style="font-size:42px" id="gameIcon">➕</div>
+            <p>Choose the correct answer!</p>
+            <div class="big" id="question">5 + 3 = ?</div>
+        </div>
+
+        <div class="answers" id="answers"></div>
+
+        <div class="feedback" id="feedback"></div>
+
+        <div class="start-row">
+            <button class="btn" id="nextBtn" onclick="nextQuestion()" disabled>
+                Next Question →
             </button>
         </div>
+    </div>
 
-        <div class="card">
-            <h3>Lesson 2: Respecting Others</h3>
-            <p>Learn how to treat others with kindness and respect.</p>
-            <button class="action" onclick="alert('Lesson 2: Listen to others and respect their differences!')">
-                Open Lesson
-            </button>
+</section>
+
+<!-- REWARD SCREEN -->
+<section id="finish" class="screen">
+
+    <div class="panel reward">
+        <div class="reward-emoji" id="trophy">🏆</div>
+        <div class="tag">CHALLENGE COMPLETE</div>
+        <h1 id="finishTitle">Amazing Work!</h1>
+        <p id="finishMessage"></p>
+
+        <div class="reward-score">
+            <h2 id="scoreResult">8 / 10 ⭐</h2>
+            <p id="scoreDescription">You earned 8 stars!</p>
         </div>
 
-        <div class="card">
-            <h3>Lesson 3: Making Good Decisions</h3>
-            <p>Learn how to think before you act and consider consequences.</p>
-            <button class="action" onclick="alert('Lesson 3: Stop, think, and make a responsible choice!')">
-                Open Lesson
-            </button>
-        </div>
-    </section>
+        <h3>Your New Achievements</h3>
 
-    <!-- ACTIVITIES PAGE -->
-    <section id="activities" class="page">
-        <h2>Interactive Activities</h2>
-
-        <div class="card">
-            <h3>What Would You Do?</h3>
-            <p>
-                You disagree with your teacher's decision.
-                How should you express your opinion?
-            </p>
-            <button class="action" onclick="alert('Think about using respectful words and listening to your teacher!')">
-                Reveal a Hint
-            </button>
+        <div class="badges">
+            <div class="badge" id="resultBadge1">
+                <span>🌱</span>First Steps
+            </div>
+            <div class="badge" id="resultBadge2">
+                <span>⭐</span>Math Star
+            </div>
+            <div class="badge" id="resultBadge3">
+                <span>🏆</span>Perfect Score
+            </div>
         </div>
 
-        <div class="card">
-            <h3>Classroom Responsibility</h3>
-            <p>
-                You accidentally break something in the classroom,
-                but nobody sees you. What should you do?
-            </p>
-            <button class="action" onclick="alert('Remember: Being responsible means being honest, even when nobody is watching!')">
-                Reveal a Hint
-            </button>
-        </div>
-    </section>
+        <button class="btn" onclick="playAgain()">Play Again</button>
+        <button class="btn secondary" onclick="showScreen('setup')">
+            New Challenge
+        </button>
+        <button class="btn secondary" onclick="showScreen('home')">
+            Home
+        </button>
+    </div>
 
-    <!-- ASSIGNMENTS PAGE -->
-    <section id="assignments" class="page">
-        <h2>Student Assignments</h2>
-
-        <div class="card">
-            <h3>Assignment 1: My Responsibilities</h3>
-            <p>Write three ways you can show responsibility at school.</p>
-            <textarea id="answer" rows="4" style="width:100%; padding:10px;"
-            placeholder="Write your answer here..."></textarea>
-            <br><br>
-            <button class="action" onclick="alert('Your response: ' + document.getElementById('answer').value)">
-                Check My Response
-            </button>
-        </div>
-    </section>
-
-    <!-- QUIZ PAGE -->
-    <section id="quiz" class="page">
-        <h2>Knowledge Check!</h2>
-
-        <div class="card">
-            <h3>What does personal responsibility mean?</h3>
-
-            <label>
-                <input type="radio" name="q1" value="wrong">
-                Blaming others for your mistakes.
-            </label>
-            <br><br>
-
-            <label>
-                <input type="radio" name="q1" value="correct">
-                Taking ownership of your actions.
-            </label>
-            <br><br>
-
-            <label>
-                <input type="radio" name="q1" value="wrong">
-                Ignoring classroom rules.
-            </label>
-            <br><br>
-
-            <button class="action" onclick="checkQuiz()">
-                Submit Answer
-            </button>
-
-            <p id="result"></p>
-        </div>
-    </section>
+</section>
 
 </main>
 
-<footer>
-    <p>Life Skills & Independence | Learning Together!</p>
-</footer>
-
 <script>
+let selectedType = "addition";
+let score = 0;
+let questionNumber = 1;
+let correctAnswer;
+let answered = false;
+let totalStars = 0;
+let maxQuestions = 10;
 
-function showPage(pageName) {
-    let pages = document.querySelectorAll('.page');
+let badges = {
+    first: false,
+    star: false,
+    perfect: false
+};
 
-    pages.forEach(function(page) {
-        page.classList.remove('active');
+const icons = {
+    addition: "➕",
+    subtraction: "➖",
+    multiplication: "✖️",
+    division: "➗",
+    fractions: "🍕",
+    decimals: "🔢",
+    mixed: "🎲"
+};
+
+function showScreen(id) {
+    document.querySelectorAll(".screen").forEach(screen => {
+        screen.classList.remove("active");
+    });
+    document.getElementById(id).classList.add("active");
+}
+
+function chooseType(button) {
+    document.querySelectorAll(".category").forEach(card => {
+        card.classList.remove("selected");
     });
 
-    document.getElementById(pageName).classList.add('active');
-
-    window.scrollTo(0, 0);
+    button.classList.add("selected");
+    selectedType = button.dataset.type;
 }
 
-function checkQuiz() {
-    let answer = document.querySelector(
-        'input[name="q1"]:checked'
-    );
+function randomNumber(min, max) {
+    return Math.floor(Math.random() * (max - min + 1)) + min;
+}
 
-    let result = document.getElementById('result');
+function startGame() {
+    score = 0;
+    questionNumber = 1;
 
-    if (!answer) {
-        result.textContent = "Please select an answer!";
-    } else if (answer.value === "correct") {
-        result.textContent = "Correct! Great job!";
-    } else {
-        result.textContent = "Not quite! Try again.";
+    showScreen("game");
+    document.getElementById("roundStars").textContent = score;
+
+    let grade = document.getElementById("grade").value;
+    document.getElementById("gameGrade").textContent =
+        grade === "K" ? "Kindergarten" : "Grade " + grade;
+
+    document.getElementById("gameIcon").textContent = icons[selectedType];
+
+    makeQuestion();
+}
+
+function makeQuestion() {
+    answered = false;
+
+    document.getElementById("feedback").textContent = "";
+    document.getElementById("nextBtn").disabled = true;
+
+    let grade = document.getElementById("grade").value;
+    let level = grade === "K" ? 0 : Number(grade);
+
+    let type = selectedType;
+
+    if (type === "mixed") {
+        let options = ["addition", "subtraction"];
+
+        if (level >= 2) options.push("multiplication");
+        if (level >= 3) options.push("division");
+        if (level >= 4) options.push("fractions");
+        if (level >= 5) options.push("decimals");
+
+        type = options[randomNumber(0, options.length - 1)];
     }
+
+    let a, b, symbol, answerLabel;
+    let max = level <= 1 ? 10 : level <= 3 ? 50 : level <= 5 ? 100 : 500;
+
+    if (type === "addition") {
+        a = randomNumber(0, max);
+        b = randomNumber(0, max);
+        correctAnswer = a + b;
+        symbol = "+";
+    }
+
+    else if (type === "subtraction") {
+        a = randomNumber(0, max);
+        b = randomNumber(0, a);
+        correctAnswer = a - b;
+        symbol = "−";
+    }
+
+    else if (type === "multiplication") {
+        let limit = level <= 3 ? 5 : level <= 5 ? 12 : 20;
+        a = randomNumber(1, limit);
+        b = randomNumber(1, limit);
+        correctAnswer = a * b;
+        symbol = "×";
+    }
+
+    else if (type === "division") {
+        b = randomNumber(1, level <= 3 ? 5 : 12);
+        correctAnswer = randomNumber(1, level <= 3 ? 10 : 20);
+        a = b * correctAnswer;
+        symbol = "÷";
+    }
+
+    else if (type === "fractions") {
+        let denominators = level <= 5 ? [2, 4, 8] : [2, 3, 4, 5, 6, 8, 10];
+        let d = denominators[randomNumber(0, denominators.length - 1)];
+        let n1 = randomNumber(1, d - 1);
+        let n2 = randomNumber(1, d - 1);
+
+        if (n1 + n2 > d) n2 = d - n1;
+
+        correctAnswer = n1 + n2;
+        a = n1 + "/" + d;
+        b = n2 + "/" + d;
+        symbol = "+";
+        answerLabel = correctAnswer + "/" + d;
+    }
+
+    else if (type === "decimals") {
+        let first = randomNumber(1, 100) / 10;
+        let second = randomNumber(1, 100) / 10;
+        a = first.toFixed(1);
+        b = second.toFixed(1);
+        correctAnswer = Number((first + second).toFixed(1));
+        symbol = "+";
+    }
+
+    document.getElementById("question").textContent =
+        `${a} ${symbol} ${b} = ?`;
+
+    createAnswers(answerLabel);
+    updateGame();
 }
 
+function createAnswers(answerLabel) {
+    let choices = [];
+
+    if (answerLabel) {
+        let denominator = Number(answerLabel.split("/")[1]);
+        let numerator = correctAnswer;
+
+        choices = [
+            {value: answerLabel, correct: true},
+            {value: `${Math.max(0, numerator - 1)}/${denominator}`, correct: false},
+            {value: `${numerator + 1}/${denominator}`, correct: false},
+            {value: `${numerator + 2}/${denominator}`, correct: false}
+        ];
+    } else {
+        choices = [{value: correctAnswer, correct: true}];
+
+        while (choices.length < 4) {
+            let wrong = Number((correctAnswer + randomNumber(-10, 10)).toFixed(1));
+
+            if (wrong >= 0 && !choices.some(c => c.value === wrong)) {
+                choices.push({value: wrong, correct: false});
+            }
+        }
+    }
+
+    choices.sort(() => Math.random() - .5);
+
+    let container = document.getElementById("answers");
+    container.innerHTML = "";
+
+    choices.forEach(choice => {
+        let button = document.createElement("button");
+        button.className = "answer";
+        button.textContent = choice.value;
+
+        button.onclick = () => checkAnswer(choice, button);
+        container.appendChild(button);
+    });
+}
+
+function checkAnswer(choice, button) {
+    if (answered) return;
+    answered = true;
+
+    document.querySelectorAll(".answer").forEach(btn => {
+        btn.disabled = true;
+
+        let isCorrect = btn === button && choice.correct;
+
+        if (isCorrect) btn.classList.add("correct");
+    });
+
+    if (choice.correct) {
+        score++;
+        totalStars++;
+
+        document.getElementById("feedback").textContent =
+            "⭐ Excellent! You got it right!";
+        document.getElementById("feedback").style.color = "#477b55";
+    } else {
+        button.classList.add("incorrect");
+        document.getElementById("feedback").textContent =
+            "Good try! Keep learning. 🌱";
+        document.getElementById("feedback").style.color = "#a36b5b";
+    }
+
+    document.getElementById("totalStars").textContent = totalStars;
+    document.getElementById("roundStars").textContent = score;
+
+    document.getElementById("nextBtn").disabled = false;
+    updateGame();
+}
+
+function updateGame() {
+    document.getElementById("questionCount").textContent =
+        questionNumber + " / " + maxQuestions;
+
+    document.getElementById("progress").style.width =
+        (questionNumber / maxQuestions * 100) + "%";
+}
+
+function nextQuestion() {
+    if (questionNumber === maxQuestions) {
+        finishGame();
+        return;
+    }
+
+    questionNumber++;
+    makeQuestion();
+}
+
+function finishGame() {
+    showScreen("finish");
+
+    document.getElementById("scoreResult").textContent =
+        score + " / 10 ⭐";
+
+    document.getElementById("scoreDescription").textContent =
+        "You earned " + score + " stars!";
+
+    let title = "Keep Growing!";
+    let message = "Practice makes progress. Keep trying!";
+    let trophy = "🌱";
+
+    if (score >= 5) {
+        title = "Great Job!";
+        message = "You completed your challenge and earned a badge!";
+        trophy = "🥉";
+        badges.first = true;
+    }
+
+    if (score >= 8) {
+        title = "Math Star!";
+        message = "Fantastic work! You are becoming a math expert!";
+        trophy = "⭐";
+        badges.star = true;
+    }
+
+    if (score === 10) {
+        title = "Math Champion!";
+        message = "Perfect score! You answered all 10 questions correctly!";
+        trophy = "🏆";
+        badges.perfect = true;
+    }
+
+    document.getElementById("finishTitle").textContent = title;
+    document.getElementById("finishMessage").textContent = message;
+    document.getElementById("trophy").textContent = trophy;
+
+    showBadges();
+}
+
+function showBadges() {
+    const ids = ["resultBadge1", "resultBadge2", "resultBadge3"];
+    const homeIds = ["homeBadge1", "homeBadge2", "homeBadge3"];
+    const earned = [badges.first, badges.star, badges.perfect];
+
+    ids.forEach((id, i) => {
+        document.getElementById(id).classList.toggle("earned", earned[i]);
+        document.getElementById(homeIds[i]).classList.toggle("earned", earned[i]);
+    });
+}
+
+function playAgain() {
+    startGame();
+}
 </script>
 
 </body>
